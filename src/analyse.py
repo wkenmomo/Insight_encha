@@ -67,6 +67,8 @@ for row in datareader:
         amount = row[14]
     except IndexError as error:
         continue #we probably met an unexpected /n
+    if (name_checker.search(donorname) == None:
+        print donorname
     if (name_checker.search(donorname) == None or zip_checker.search(donorzip) == None or other_id or date_checker.search(date) == None or len(recipient)==0):
         continue
     try: 
