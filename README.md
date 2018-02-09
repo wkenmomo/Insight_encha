@@ -12,9 +12,7 @@
 
   <ol>
     <li>Keep record of previous donation to identify repeat donor</li>
-
-    <li>Keep record of donation stats for each candidate in each zip in each year. So we
-    can calculate new stat and print after we identify donor in part 1</li>
+    <li>Keep record of donation stats for each candidate in each zip in each year. So we can calculate new stat and print after we identify donor in part 1</li>
   </ol>
 
   <h2>Identify repeat donor</h2>
@@ -25,7 +23,7 @@
   <p>This calls for use of associative dictionary, we can use "name+zipcode" as key and
   earliest donation year as value.<br></p>
 
-  <p>std::unordered_map&lt;string, size_t&gt; would do nicely</p>
+  <p><code>std::unordered_map&lt;string, size_t&gt;</code> would do nicely</p>
 
   <h2>Keep stat for combinations of candidate, zip and year</h2>
 
@@ -44,29 +42,19 @@
 
   <h3>Data structure</h3>
 
-  <p>class candidateZipYear {</p>
-
-  <p>private:</p>
-
-  <p>&nbsp; static int percentile;<br></p>
-
-  <p>&nbsp; size_t count;</p>
-
-  <p>&nbsp; double sum;</p>
-
-  <p>&nbsp; std::priority_queue&lt;int&gt; lower_part;</p>
-
-  <p>&nbsp; std::priority_queue&lt;int, std::greater&lt;int&gt;&gt; upper_part;</p>
-
-  <p>public:</p>
-
-  <p>&nbsp; candidateZipYear()</p>
-
-  <p>&nbsp; void insert(double);</p>
-
-  <p>&nbsp; std::vector&lt;int&gt; output();</p>
-
-  <p>};</p>
+  <pre><code>
+  class candidateZipYear {
+    private:
+      static int percentile;
+      size_t count;
+      double sum;
+      std::priority_queue&lt;int&gt; lower_part;
+      std::priority_queue&lt;int, std::greater&lt;int&gt;&gt; upper_part;
+    public:
+      candidateZipYear()
+      void insert(double);
+      std::vector&lt;int&gt; output();
+  };</code></pre>
 
   <h2>Input Validation</h2>
 
@@ -93,12 +81,8 @@
 
   <ul>
     <li>I need to brush up my python skills</li>
-
     <li>It's probably I/O bottlenecked anyway</li>
-
-    <li>Writing a csv parser seems lots of coding. You probably want to
-    std::getline(your_file, this_line) then std::stringstream row(this_line) then put
-    std::getline(row, unit, '|') in a while loop to push unit back to a vector<br></li>
+    <li>Writing a csv parser seems lots of coding. You probably want to <code>std::getline(your_file, this_line)</code> then <code>std::stringstream row(this_line)</code> then put <code>std::getline(row, unit, '|')</code> in a while loop to push unit back to a vector</li>
   </ul>
 </body>
 </html>
