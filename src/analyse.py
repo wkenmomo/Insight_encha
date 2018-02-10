@@ -36,7 +36,7 @@ class moneyCounter:
             heapq.heappush(self.upper, amount)
         else:
             heapq.heappush(self.lower, -amount)
-        #next see if we need to resize lower and upper, adding one element will at most increase the size of lower by one
+        #next see if we need to resize lower, adding one element will at most increase the size of lower by one
         target_size = (self.count*self.percentile)//100-((self.count*self.percentile)%100==0) #total in the lower should be less than (n*p/100), use int division, subtract one if modulo is 0
         if len(self.lower)>target_size:
             heapq.heappush(self.upper, -self.lower[0])
@@ -44,8 +44,6 @@ class moneyCounter:
         elif len(self.lower)<target_size:
             heapq.heappush(self.lower, -self.upper[0])
             heapq.heappop(self.upper)
-        if len(self.lower)!=target_size:
-            raise ValueError('The length is not right after resizing one time')
     
     def output(self):
         return [round(self.upper[0], 0), round(self.sum, 0), self.count]
@@ -71,7 +69,7 @@ for row in datareader:
         recipient = row[0]
         amount = row[14]
     except IndexError as error:
-        continue #we probably met an unexpected /n
+        continue #we probably met an empty row
     if (name_checker.search(donorname) == None or name_checker_2.search(donorname) != None or zip_checker.search(donorzip) == None or other_id or date_checker.search(date) == None or len(recipient)==0):
         continue
     try: 
